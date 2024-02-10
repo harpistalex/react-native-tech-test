@@ -2,14 +2,17 @@ import { router } from "expo-router";
 import { useCallback } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import AppText from "./app-text";
 import { Beer } from "./types";
 import { usePaginatedAPI } from "../api";
+import { DARK_GREEN } from "../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: DARK_GREEN,
   },
   title: {
     fontSize: 48,
@@ -53,7 +56,7 @@ const BeerListScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Beer Screen</Text>
+      <AppText type="heading">Beer list</AppText>
       <Text style={styles.body}>Beer will be listed here...</Text>
       <Pressable onPress={getMoreBeers}>
         <Text>More beers</Text>
