@@ -1,9 +1,4 @@
 export const GREEN = "#69CEA2";
 export const DARK_GREEN = "#52AD92";
-export const TEAL = "#80B0A5";
-export const YELLOW = "#C2D170";
-export const BLUE = "#0C5C88";
-export const LIGHT_BLUE = "#76B5DC";
 export const BLACK = "#2B2B2B";
-export const GREY = "#333333";
 export const WHITE = "#F5F5F5";
