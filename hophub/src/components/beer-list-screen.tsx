@@ -13,17 +13,16 @@ import AppText from "./app-text";
 import BeerListItem from "./beer-list-item";
 import { Beer } from "./types";
 import { usePaginatedAPI } from "../api";
-import { DARK_GREEN, GREEN } from "../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GREEN,
   },
   button: {
     padding: 8,
-    backgroundColor: DARK_GREEN,
+    paddingTop: 16,
     textAlign: "center",
+    fontSize: 24,
   },
   noData: {
     flex: 1,
@@ -84,7 +83,7 @@ const BeerListScreen: React.FC = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <FlatList
         keyExtractor={keyExtractor}
         renderItem={renderItem}

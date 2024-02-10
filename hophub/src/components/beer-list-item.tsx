@@ -5,7 +5,7 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 import AppText from "./app-text";
 import { DetailsRouteParams } from "./beer-detail-screen";
 import { Beer } from "./types";
-import { GREEN, YELLOW } from "../styles/colors";
+import { DARK_GREEN, GREEN } from "../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: GREEN,
     borderWidth: 2,
-    borderColor: YELLOW,
+    borderColor: DARK_GREEN,
   },
   textContainer: {
     flexDirection: "column",

@@ -1,12 +1,12 @@
 import { DefaultTheme, Theme } from "@react-navigation/native";
 
-import { BLACK, BLUE, TEAL, WHITE } from "./colors";
+import { BLACK, DARK_GREEN, WHITE } from "./colors";
 
 export const AppTheme: Theme = {
   ...DefaultTheme,
   colors: {
-    primary: BLUE,
-    background: TEAL,
+    primary: BLACK,
+    background: DARK_GREEN,
     card: WHITE,
     text: BLACK,
     border: BLACK,

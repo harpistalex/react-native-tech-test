@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
+import { BLACK, DARK_GREEN } from "../styles/colors";
 import { AppTheme } from "../styles/theme";
 
 export { ErrorBoundary } from "expo-router";
@@ -45,11 +46,35 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen
           name="index"
-          options={{ headerShown: true, title: "Beer List" }}
+          options={{
+            headerShown: true,
+            title: "Beer List",
+            headerStyle: {
+              backgroundColor: DARK_GREEN,
+            },
+            headerTitleStyle: {
+              fontFamily: "BebasNeue",
+              fontSize: 32,
+              color: BLACK,
+            },
+            headerShadowVisible: false,
+          }}
         />
         <Stack.Screen
           name="beer-detail"
-          options={{ headerShown: true, title: "Beer Detail" }}
+          options={{
+            headerShown: true,
+            title: "Beer Details",
+            headerStyle: {
+              backgroundColor: DARK_GREEN,
+            },
+            headerTitleStyle: {
+              fontFamily: "BebasNeue",
+              fontSize: 32,
+              color: BLACK,
+            },
+            headerShadowVisible: false,
+          }}
         />
       </Stack>
     </ThemeProvider>
