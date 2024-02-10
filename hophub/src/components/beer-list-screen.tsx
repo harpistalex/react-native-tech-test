@@ -79,12 +79,16 @@ const BeerListScreen: React.FC = () => {
     );
   }
 
+  const allBeers = beers.reduce((acc, curr) => {
+    return acc.concat(curr);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         keyExtractor={keyExtractor}
         renderItem={renderItem}
-        data={beers[beers.length - 1]}
+        data={allBeers}
       />
       <Pressable onPress={getMoreBeers}>
         <AppText type="heading" style={styles.button}>
