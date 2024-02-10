@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import AppText from "./app-text";
+import BeerListItem from "./beer-list-item";
 import { Beer } from "./types";
 import { usePaginatedAPI } from "../api";
 import { DARK_GREEN } from "../styles/colors";
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: DARK_GREEN,
+    padding: 8,
   },
   title: {
     fontSize: 48,
@@ -34,8 +36,14 @@ const BeerListScreen: React.FC = () => {
     router.navigate("/beer-detail");
   }, []);
 
-  const { data, size, setSize, isLoading, isValidating, error } =
-    usePaginatedAPI<Beer[]>("beers", 10);
+  const {
+    data: beers,
+    size,
+    setSize,
+    isLoading,
+    isValidating,
+    error,
+  } = usePaginatedAPI<Beer[]>("beers", 10);
 
   const getMoreBeers = useCallback(() => {
     setSize(size + 1);
@@ -49,10 +57,16 @@ const BeerListScreen: React.FC = () => {
     return <Text>Oh no error!</Text>;
   }
 
-  if (data) {
-    console.log("SIZE:", size);
-    console.log("DATA:", data[data.length - 1][0]);
+  if (!beers) {
+    return <Text>No beers.</Text>;
   }
+  if (beers) {
+    console.log("SIZE:", size);
+    console.log("DATA:", beers[beers.length - 1][0]);
+  }
+
+  console.log(beers[beers.length - 1][0]); // Single beer
+  console.log(beers[beers.length - 1][0].image_url);
 
   return (
     <View style={styles.container}>
@@ -66,6 +80,7 @@ const BeerListScreen: React.FC = () => {
         <Text>Go to detail screen</Text>
       </Pressable>
       <View style={styles.separator} />
+      <BeerListItem beer={beers[beers.length - 1][0]} />
     </View>
   );
 };
