@@ -1,41 +1,48 @@
-import { router } from "expo-router";
 import { useCallback } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItemInfo,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppText from "./app-text";
 import BeerListItem from "./beer-list-item";
 import { Beer } from "./types";
 import { usePaginatedAPI } from "../api";
-import { DARK_GREEN } from "../styles/colors";
+import { DARK_GREEN, GREEN } from "../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //alignItems: "center",
+    //justifyContent: "center",
+    backgroundColor: GREEN,
+  },
+  button: {
+    padding: 8,
+    backgroundColor: DARK_GREEN,
+    textAlign: "center",
+  },
+  noData: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: DARK_GREEN,
-    padding: 8,
   },
-  title: {
-    fontSize: 48,
-    fontFamily: "BebasNeue",
-  },
-  body: {
-    fontSize: 14,
-    fontFamily: "Montserrat",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  loader: {
+    marginVertical: 16,
   },
 });
 
-const BeerListScreen: React.FC = () => {
-  const onPress = useCallback(() => {
-    router.navigate("/beer-detail");
-  }, []);
+const keyExtractor = (item: Beer) => `${item.id}`;
+const renderItem = (info: ListRenderItemInfo<Beer>) => {
+  return <BeerListItem beer={info.item} />;
+};
 
+const BeerListScreen: React.FC = () => {
   const {
     data: beers,
     size,
@@ -50,38 +57,46 @@ const BeerListScreen: React.FC = () => {
   }, [size]);
 
   if (isLoading || isValidating) {
-    return <Text>Loading beers...</Text>;
+    return (
+      <View style={styles.noData}>
+        <AppText>Loading beers...</AppText>
+        <ActivityIndicator style={styles.loader} />
+      </View>
+    );
   }
 
   if (error) {
-    return <Text>Oh no error!</Text>;
+    return (
+      <View style={styles.noData}>
+        <AppText>Oh no error!</AppText>
+      </View>
+    );
   }
 
-  if (!beers) {
-    return <Text>No beers.</Text>;
-  }
-  if (beers) {
-    console.log("SIZE:", size);
-    console.log("DATA:", beers[beers.length - 1][0]);
+  if (!beers || beers.length === 0) {
+    return (
+      <View style={styles.noData}>
+        <AppText>No beers.</AppText>
+      </View>
+    );
   }
 
   console.log(beers[beers.length - 1][0]); // Single beer
   console.log(beers[beers.length - 1][0].image_url);
 
   return (
-    <View style={styles.container}>
-      <AppText type="heading">Beer list</AppText>
-      <Text style={styles.body}>Beer will be listed here...</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        data={beers[beers.length - 1]}
+      />
       <Pressable onPress={getMoreBeers}>
-        <Text>More beers</Text>
+        <AppText type="heading" style={styles.button}>
+          Get more beers
+        </AppText>
       </Pressable>
-      <View style={styles.separator} />
-      <Pressable onPress={onPress}>
-        <Text>Go to detail screen</Text>
-      </Pressable>
-      <View style={styles.separator} />
-      <BeerListItem beer={beers[beers.length - 1][0]} />
-    </View>
+    </SafeAreaView>
   );
 };
 

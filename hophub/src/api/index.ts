@@ -53,12 +53,10 @@ export const usePaginatedAPI = <T>(
     if (previousPageData && !previousPageData.length) {
       return null;
     }
-    //console.log('INFINITE URL', `${endpoint}?page=${pageIndex + 1}&per_page=${limit}`)
     return `${endpoint}?page=${pageIndex + 1}&per_page=${limit}`;
   };
   const response = useSWRInfinite<T>(getKey, fetcher, {
     revalidateFirstPage: false,
   });
-  console.log("RESPONSE", response.size);
   return response;
 };

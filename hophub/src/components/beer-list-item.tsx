@@ -1,17 +1,19 @@
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
+import React, { useCallback } from "react";
+import { Image, Pressable, StyleSheet } from "react-native";
 
 import AppText from "./app-text";
 import { Beer } from "./types";
-import { GREEN } from "../styles/colors";
+import { GREEN, YELLOW } from "../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    paddingHorizontal: 16,
     paddingVertical: 4,
     alignItems: "center",
     backgroundColor: GREEN,
+    borderWidth: 2,
+    borderColor: YELLOW,
   },
   image: {
     height: 60,
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
   },
   description: {
     marginHorizontal: 8,
+    flex: 1,
   },
 });
 
@@ -30,9 +33,19 @@ interface Props {
 }
 
 const BeerListItem: React.FC<Props> = ({ beer }) => {
-  console.log(beer.image_url);
+  const displayParams = {
+    image: beer.image_url,
+    name: beer.name,
+    abv: beer.abv,
+    tagline: beer.tagline,
+    description: beer.description,
+    firstBrewed: beer.first_brewed,
+  };
+  const onPress = useCallback(() => {
+    router.navigate({ pathname: "/beer-detail", params: displayParams });
+  }, []);
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <Image
         source={{
           uri: beer.image_url,
@@ -44,7 +57,7 @@ const BeerListItem: React.FC<Props> = ({ beer }) => {
       <AppText numberOfLines={1} style={styles.description}>
         {beer.description}
       </AppText>
-    </View>
+    </Pressable>
   );
 };
 
