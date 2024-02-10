@@ -16,13 +16,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alexandraking.hophub"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#80B0A5"
-      }
+      },
+      "package": "com.alexandraking.hophub"
     },
     "web": {
       "favicon": "./assets/favicon.png"
