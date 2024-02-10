@@ -50,6 +50,10 @@ function RootLayoutNav() {
           name="index"
           options={{ headerShown: true, title: "Beer List" }}
         />
+        <Stack.Screen
+          name="beer-detail"
+          options={{ headerShown: true, title: "Beer Detail" }}
+        />
       </Stack>
     </ThemeProvider>
   );
