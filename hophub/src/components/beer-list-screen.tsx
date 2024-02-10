@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 48,
+    fontFamily: "BebasNeue",
   },
   body: {
     fontSize: 14,
+    fontFamily: "Montserrat",
   },
   separator: {
     marginVertical: 30,

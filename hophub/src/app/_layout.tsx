@@ -19,7 +19,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    // TODO: Load fonts.
+    BebasNeue: require("../../assets/fonts/BebasNeue-Regular.ttf"),
+    Montserrat: require("../../assets/fonts/Montserrat-Regular.ttf"),
     ...FontAwesome.font,
   });
 
