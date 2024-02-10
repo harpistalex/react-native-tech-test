@@ -1,8 +1,9 @@
 import { router } from "expo-router";
 import React, { useCallback } from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import AppText from "./app-text";
+import { DetailsRouteParams } from "./beer-detail-screen";
 import { Beer } from "./types";
 import { GREEN, YELLOW } from "../styles/colors";
 
@@ -15,15 +16,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: YELLOW,
   },
+  textContainer: {
+    flexDirection: "column",
+    flex: 1,
+    padding: 8,
+    justifyContent: "center",
+  },
   image: {
     height: 60,
     width: 60,
   },
   name: {
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   description: {
-    marginHorizontal: 8,
     flex: 1,
   },
 });
@@ -33,10 +39,10 @@ interface Props {
 }
 
 const BeerListItem: React.FC<Props> = ({ beer }) => {
-  const displayParams = {
+  const displayParams: DetailsRouteParams = {
     image: beer.image_url,
     name: beer.name,
-    abv: beer.abv,
+    abv: String(beer.abv),
     tagline: beer.tagline,
     description: beer.description,
     firstBrewed: beer.first_brewed,
@@ -53,10 +59,12 @@ const BeerListItem: React.FC<Props> = ({ beer }) => {
         style={styles.image}
         resizeMode="contain"
       />
-      <AppText style={styles.name}>{beer.name}</AppText>
-      <AppText numberOfLines={1} style={styles.description}>
-        {beer.description}
-      </AppText>
+      <View style={styles.textContainer}>
+        <AppText style={styles.name}>{beer.name}</AppText>
+        <AppText numberOfLines={1} style={styles.description}>
+          {beer.description}
+        </AppText>
+      </View>
     </Pressable>
   );
 };

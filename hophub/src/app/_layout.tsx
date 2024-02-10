@@ -18,6 +18,7 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     BebasNeue: require("../../assets/fonts/BebasNeue-Regular.ttf"),
     Montserrat: require("../../assets/fonts/Montserrat-Regular.ttf"),
+    MontserratBold: require("../../assets/fonts/Montserrat-Bold.ttf"),
     ...FontAwesome.font,
   });
 

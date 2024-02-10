@@ -18,8 +18,6 @@ import { DARK_GREEN, GREEN } from "../styles/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignItems: "center",
-    //justifyContent: "center",
     backgroundColor: GREEN,
   },
   button: {
@@ -80,9 +78,6 @@ const BeerListScreen: React.FC = () => {
       </View>
     );
   }
-
-  console.log(beers[beers.length - 1][0]); // Single beer
-  console.log(beers[beers.length - 1][0].image_url);
 
   return (
     <SafeAreaView style={styles.container}>

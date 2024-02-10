@@ -26,7 +26,6 @@ export async function fetcher<T>(
 
   const bodyText = await response.text();
   const body = parseBody(bodyText);
-  console.log("Fetcher!", HOST + endpoint);
   if (!response.ok) {
     throw new Error(`${response}, ${body}`);
   }
